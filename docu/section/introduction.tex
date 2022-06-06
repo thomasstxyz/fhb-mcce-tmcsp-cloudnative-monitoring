@@ -1,0 +1,83 @@
+\section{Einleitung}
+\noindent
+In cloudnativen Umgebungen gelten hohe Anforderungen an das Monitoring.
+Es müssen weitaus komplexere und vernetzte Infrastrukturen überwacht und observiert werden.
+Der Microservice-Ansatz im Software-Architektur-Design macht es mit
+steigender Anzahl an Diensten stetig schwieriger eine Applikation 
+ganzheitlich zu monitoren. 
+
+Logs werden statt auf einer, oder 
+einer Hand voll physischen Maschinen, hingegen auf bis zu hunderten
+verteilten Systemen geschrieben, oder nicht geschrieben, sondern lediglich auf 
+die Standardausgabe ausgegeben. Um diesen veränderten Rahmenbedingungen 
+und Anforderungen nachzukommen, müssen Monitoring-Systeme angepasst werden.
+Cloudnative Monitoring-Tools aggregieren Logs einer Applikation
+von beliebig vielen vernetzten Systemen in eine gemeinsame Datenbank.
+Somit können diese Logs zum einen persistiert werden. Des Weiteren können die 
+zusammengeführten Logs von einer Suchmaschine indiziert werden, und
+im Anschluss effektiv durchsucht werden. Logs von verschiedenen oder 
+verwandten Applikationen können miteinander verglichen werden.
+Mit Softwarelösungen wie Elasticsearch \cite{elasticsearchWebsite}
+können diese Daten analysiert werden, auch mithilfe von Machine Learning.
+Dies kann zum Beispiel eine Analyse auf Anomalien sein.
+Elasticsearch bietet noch viele weitere Funktionen im Bereich
+Analyse von Big Data.
+Logs geben in der Regel detailliertere Informationen über Ressourcen als Metriken.
+
+Metriken sind typischerweise als Zahlen dargestellte Daten, meist in Relation
+zur relativen Zeit, welche in einer Time-Series-Datenbank persistiert werden.
+Ebenso sind unter Metriken jene Werte zu verstehen, 
+die auch traditionelle Monitoring-Systeme wie beispielsweise
+Nagios \cite{nagiosOrgWebsite}
+verwalten. Das sind Prozessor-Auslastung, Arbeitsspeicher-Auslastung,
+Festplattenkapazität, etc.
+Aber das vielleicht Wichtigste, was man über Metriken wissen muss, ist der Punkt 
+über die Möglichkeit, Metriken über Infrastrukturkomponenten hinweg zu korrelieren. 
+Angesichts der komplexen Abhängigkeiten, die heute in IT-Umgebungen üblich sind, 
+ist die Fähigkeit, Metriken zu einem Gesamtbild zusammenzufügen, eine große Zeitersparnis.
+Mit dem Übergang zu cloudnativen Umgebungen wird dies aufgrund der dynamischen Natur der
+Cloud-Infrastruktur und der sich ständig ändernden Beziehungen zwischen dieser
+Infrastruktur und den Anwendungen noch wichtiger.
+Um also auftretende Fehler oder Unstimmigkeiten bei verteilten Anwendungen
+effizient erkennen zu können, kommen heutzutage in cloudnativen Monitoring-Systemen
+die sogenannten Traces zum Einsatz.
+
+Traces - wie der Name schon verrät - 
+sind Anwendungs-Trace-Daten, die Informationen über bestimmte Anwendungsvorgänge
+"verfolgen". Da heutzutage so viele Anwendungen voneinander abhängig sind, 
+umfassen diese Vorgänge in der Regel Sprünge durch mehrere Dienste, sogenannte Spans.
+Traces bieten somit einen wichtigen Einblick in den Zustand einer Anwendung 
+von Ende zu Ende. Sie konzentrieren sich jedoch ausschließlich auf die Anwendungsebene
+und bieten nur begrenzte Einblicke in den Zustand der zugrunde liegenden Infrastruktur.
+Selbst wenn Traces gesammelt, werden also immer noch Metriken benötigt werden, 
+um einen vollständigen Überblick über eine Umgebung zu erhalten. 
+Application-Performance-Management-Tools (APM-Tools) speisen Trace-Informationen in einen
+zentralisierten Metrikspeicher ein, sodass Traces eine gute Datenquelle für eine anwendungszentrierte Sichtweise darstellen.
+Der Bedarf an der Sichtweise, die Traces bieten können, wird in container-basierten
+Microservice-Architekturen, die nichts anderes als eine Sammlung von zusammengefügten
+Services sind, noch größer. Diese Umgebungen können mit dem sogenannten
+verteilten Tracing adressiert werden.
+
+Verteiltes Tracing ist die dritte Säule der Observability und bietet Einblicke in die 
+Leistung von Vorgängen über Microservices hinweg. Eine Anwendung kann von mehreren Diensten 
+abhängen, von denen jeder seinen eigenen Satz an Metriken und Logs hat. 
+Verteiltes Tracing ist eine Möglichkeit, Anfragen zu beobachten, während sie sich 
+durch verteilte Cloud-Umgebungen bewegen. In diesen komplexen Systemen zeigen Traces 
+Probleme auf, die bei den Beziehungen zwischen einzelnen Diensten auftreten können.
+
+In folgenden dieses Papers wird die Installation, sowie die erste Einrichtung
+der open-source Lösungen Elasticsearch und Kibana beschrieben.
+Diese werden von dem amerikanischen Unternehmen Elasticsearch B.V.
+entwickelt. Diese Kombination der eigenständigen Tools
+Elasticsearch und Kibana wird auch ELK Stack genannt.  
+Dieser Software-Stack kann mit weiteren von Elasticsearch B.V. entwickelten
+Software-Lösungen wie Logstash oder Beats zum Elastic Stack erweitert werden.
+Zusammen bildet der Stack ein mächtiges Tool zur cloudnativen
+Observability.
+
+Observability ist die Fähigkeit, den internen Zustand eines Systems zu verstehen, 
+indem die von ihm erzeugten Daten wie Logs, Metriken und Traces analysiert werden.
+
+
+
+
