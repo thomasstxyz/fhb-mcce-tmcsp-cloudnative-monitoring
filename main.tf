@@ -29,7 +29,7 @@ resource "aws_instance" "instance-worker" {
 
   # spec
   ami = data.aws_ami.ubuntu-focal-x86_64.id
-  instance_type = "t3.micro"
+  instance_type = "t3.medium"
 
   # script runs at first boot
   user_data = templatefile("${path.module}/templates/init_instance-worker.tftpl", { a = "a" })
