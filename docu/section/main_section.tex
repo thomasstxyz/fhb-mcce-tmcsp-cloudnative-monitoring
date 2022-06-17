@@ -1,7 +1,13 @@
-\section{Voraussetzungen}
+\section{Installation}
+Die im folgenden erläuterten Installationsschritte
+sind in der Datei \verb|README.md| in dem Repository
+\url{https://github.com/thomasstxyz/fhb-mcce-tmcsp-cloudnative-monitoring}.
+genauer beschrieben.
+
+\subsection{Ausgangssituation und Vorraussetzungen}
 Als Basis-Betriebssystem wird Ubuntu Linux Server 
 in Version 20.04 \cite{ubuntuServerWebsite} verwendet.
-Darauf ist die Docker Engine \cite{dockerEngineWebsite} installiert.
+Woraud die Docker Engine \cite{dockerEngineWebsite} installiert ist.
 
 Für den Betrieb von Elasticsearch als Container muss der 
 Parameter \verb|vm.max_map_count| mittels \verb|sysctl| 
@@ -12,13 +18,6 @@ sudo sysctl -w vm.max_map_count=262144
 echo "vm.max_map_count=262144"|sudo tee \
 --append /etc/sysctl.conf
 \end{verbatim}
-
-
-\section{Installation}
-Die im folgenden erläuterten Installationsschritte
-sind in der Datei \verb|README.md| in dem Repository
-\url{https://github.com/thomasstxyz/fhb-mcce-tmcsp-cloudnative-monitoring}.
-genauer beschrieben.
 
 Als Quelle der Container Images wird die Repository
 \verb|docker.elastic.co| herangezogen.
@@ -33,6 +32,8 @@ im selben internen Docker-Netzwerk \verb|elastic| laufen.
 Dieses wird mit dem Befehl
 \verb|docker network create elastic| erstellt.
 
+
+\subsection{Start der Container}
 Nun wird die initiale Instanz von Elasticsearch gestartet, 
 welche einen Elasticsearch-Cluster erstellt, mit anfangs
 noch einem Knoten.

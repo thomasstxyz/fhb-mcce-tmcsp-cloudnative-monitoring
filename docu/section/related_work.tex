@@ -1,11 +1,39 @@
-\section{Related Work}
+\section{Vergleich mit anderen Lösungen}
+Der ELK Stack (Elasticsearch, Kibana) kann zum Einlesen und Darstellen von Daten aus verschiedenen Quellen genutzt werden.
+Daten werden Dabei von Elasticsearch als unstrukturierte JSON Objekte gespeichert und sowohl die Keys als auch deren Inhalt indiziert.
+Dies ermöglicht es, die Daten später mittels JSON Objekt wieder abfragen zu können. Dazu können die beiden Query Sprachen Domain Specific Language (DSL) oder Lucene verwendet werden.
+Das alternativ Produkt zum ELK Stack von Grafana, namens Loki speichert Daten im Single Binary Mode, welche im horizontal skalierten Modus in Cloud Speicher ausgelagert werden. 
+\cite{GrafanaL66:online}
 
-\subsection{Maintaining the Integrity of the Specifications}
 
-The IEEEtran class file is used to format your paper and style the text. All margins, 
-column widths, line spaces, and text fonts are prescribed; please do not 
-alter them. You may note peculiarities. For example, the head margin
-measures proportionately more than is customary. This measurement 
-and others are deliberate, using specifications that anticipate your paper 
-as one part of the entire proceedings, and not as an independent document. 
-Please do not revise any of the current designations.
+Die protokollierten Daten werden im Klartext abgespeichert und für spätere Suche und Identifikation zusätzlich mit Labels versehen, welche dann für die Identifikation genutzt werden können. 
+Im Gegensatz zu einer vollständigen indexierung reduziert dieser Ansatz die Betriebskosten des Systems und bietet Entwicklern die Möglichkeit einer aggressiveren Protokollierung. 
+Der große Nachteil dieses Ansatzes ist die Suche nach Text innerhalb des abgespeicherten Eintrags. 
+Für diese müssen alle Chunks innerhalb des Suchfensters geladen. 
+Diese können jedoch duch die zusätzliche Spezifizierung mittels eines Suchlabels für eine schnellere Suche eingeschränkt werden.
+Für die suchen von Logs kann für Loki bietet Grafana die Query Sprache LogQL an.
+\cite{Comparis37:online}
+
+
+
+Fluentd, welche nicht dem Unternehmen hinter Elasticsearch gehört, wird jedoch oft als zusätzliches Tool mit deren Produkten zur Datensammlung verwendet. 
+Es kann verwendet werden, um Logs aus vielen Quellen aufzunehmen, zu verarbeiten und an ein oder mehrere Ziele weiterzuleiten.
+Im Gegensatz dazu ist die Lösung von Grafana, namens Promtail auf Loki zugeschnitten. 
+Die Hauptfunktion von Promtail ist es jedoch, gespeicherte Protokolldateien zu erkennen und sie in Verbindung mit einer Reihe von Labels an Loki weiterzuleiten. 
+So kann Promtail beispielsweise Kubernetes Pods selbstständig erkennen, welche auf dem gleichen Node wie Promtail laufen oder Container Sidecar genutzt werden.
+Es bietet ebenfalls Treiber für Docker Container und kann logs von ausgewählten Ordnern auslesen. 
+
+Die Protokollerstellung von Loki durch Label Paare ist sehr ähnlich zur Erstellung von Metriken von Prometheus. 
+Wird Loki in einer Umgebung zusammen mit Prometheus eingesetzt, haben die Protokolle von Promtail in der Regel die gleichen Labels wie die Metriken der Anwendungen, da sie die gleichen Mechanismen zur Erkennung von Services nutzen. 
+Die gleichen Bezeichnungen für Protokolle und Metriken, erleichtern es Benutzer nahtlos zwischen Metriken und Protokollen wechseln und vereinfacht den Analyseprozess.
+\cite{Comparis37:online}
+
+
+
+Für die Visuelle Aufbereitung von Elasticsearch Daten wird meist Kibana verwendet, welches ein sehr leistungsstarkes Tool für die Erstellung von Analysen der Daten ist. 
+Kibana bietet eine Vielzahl an Visualisierungstools für die Datenanalyse, wie beispielsweise Standortkarten, maschinelles Lernen für die Erkennung von Anomalien und Diagramme zur Erkennung von Beziehungen zwischen Daten. Zusätzlich können in Kibana Warnmeldungen konfiguriert werden, um Benutzer zu benachrichtigen, wenn einer der vordefinierten Zustände auftritt.
+
+Grafana hingegen ist speziell auf die Analyse von nach Zeit gereihten Daten aus Quellen wie Prometheus und Loki spezialisiert.
+Es können Dashboards eingerichtet werden, um Metriken zu visualisieren zusätzlich kann die Explorer Ansicht verwendet werden, um Abfragen für Daten zu erstellen. 
+Wie auch Kibana unterstützt Grafana die Versendung von Alarmierungsnachrichten auf der Grundlage der vorliegenden Metriken.
+\cite{Comparis37:online}
