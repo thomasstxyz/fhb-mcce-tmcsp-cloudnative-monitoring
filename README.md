@@ -1,4 +1,5 @@
 # Introduction
+
 University Assignment to build a monitoring solution which works with Metrics, Logs, Traces and Open Telemetry.
 
 # Setup
@@ -44,7 +45,9 @@ it will look something like this:
 
 Then login to the worker nodes and join them to the swarm. -->
 
-## Docker Composition
+## Application Installation on Docker
+
+### Elasticsearch
 
 Login to the instance.
 
@@ -67,7 +70,11 @@ Start Elasticsearch in Docker. A password is generated for the elastic user and 
 
     docker run -e ES_JAVA_OPTS="-Xms1g -Xmx1g" --name es01 --net elastic -p 9200:9200 -p 9300:9300 -it docker.elastic.co/elasticsearch/elasticsearch:8.2.2
 
-> Copy the generated password and enrollment token and save them in a secure location!
+Copy the generated password and enrollment token and save them in a secure location!
+Then cancel with `Ctrl + c` and start the container in the background:
+
+    docker start es01
+
 > If you need to reset the password for the elastic user or other built-in users, run the `elasticsearch-reset-password` tool. This tool is available in the Elasticsearch /bin directory of the Docker container. For example: `docker exec -it es01 /usr/share/elasticsearch/bin/elasticsearch-reset-password`
 
 Copy the http_ca.crt security certificate from your Docker container to your local machine.
@@ -88,6 +95,8 @@ When you start Elasticsearch for the first time, the installation process config
 On your new node, start Elasticsearch and include the generated enrollment token.
 
     docker run -e ENROLLMENT_TOKEN="<token>" -e ES_JAVA_OPTS="-Xms1g -Xmx1g" --name es02 --net elastic -it docker.elastic.co/elasticsearch/elasticsearch:8.2.2
+
+### Kibana
 
 Pull the Kibana container image.
 
