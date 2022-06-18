@@ -2,26 +2,30 @@
 Der ELK Stack (Elasticsearch, Kibana) kann zum Einlesen und Darstellen von Daten aus verschiedenen Quellen genutzt werden.
 Daten werden Dabei von Elasticsearch als unstrukturierte JSON Objekte gespeichert und sowohl die Keys als auch deren Inhalt indiziert.
 Dies ermöglicht es, die Daten später mittels JSON Objekt wieder abfragen zu können. Dazu können die beiden Query Sprachen Domain Specific Language (DSL) oder Lucene verwendet werden.
-Das alternativ Produkt zum ELK Stack von Grafana, namens Loki speichert Daten im Single Binary Mode, welche im horizontal skalierten Modus in Cloud Speicher ausgelagert werden. 
+Das Alternativ-Produkt zum ELK Stack von Grafana Labs,
+namens Grafana Loki \cite{grafanaLokiWebsite} speichert Daten
+im Single Binary Mode, welche im horizontal skalierten Modus in Cloud Speicher ausgelagert werden. 
 \cite{GrafanaL66:online}
 
 
-Die protokollierten Daten werden im Klartext abgespeichert und für spätere Suche und Identifikation zusätzlich mit Labels versehen, welche dann für die Identifikation genutzt werden können. 
-Im Gegensatz zu einer vollständigen indexierung reduziert dieser Ansatz die Betriebskosten des Systems und bietet Entwicklern die Möglichkeit einer aggressiveren Protokollierung. 
+Die protokollierten Daten werden im Klartext abgespeichert und für spätere Suche und Identifikation zusätzlich mit Labels versehen, welche dann für die Identifikation genutzt werden können.
+Im Gegensatz zu einer vollständigen Indexierung reduziert dieser Ansatz die Betriebskosten des Systems und bietet Entwicklern die Möglichkeit einer aggressiveren Protokollierung. 
 Der große Nachteil dieses Ansatzes ist die Suche nach Text innerhalb des abgespeicherten Eintrags. 
-Für diese müssen alle Chunks innerhalb des Suchfensters geladen. 
+Für diese müssen alle Chunks innerhalb des Suchfensters geladen werden. 
 Diese können jedoch duch die zusätzliche Spezifizierung mittels eines Suchlabels für eine schnellere Suche eingeschränkt werden.
-Für die suchen von Logs kann für Loki bietet Grafana die Query Sprache LogQL an.
+Für das Suchen von aggregierten Logs für Loki bietet Grafana die Query Sprache LogQL an.
 \cite{Comparis37:online}
 
 
 
-Fluentd, welche nicht dem Unternehmen hinter Elasticsearch gehört, wird jedoch oft als zusätzliches Tool mit deren Produkten zur Datensammlung verwendet. 
-Es kann verwendet werden, um Logs aus vielen Quellen aufzunehmen, zu verarbeiten und an ein oder mehrere Ziele weiterzuleiten.
-Im Gegensatz dazu ist die Lösung von Grafana, namens Promtail auf Loki zugeschnitten. 
-Die Hauptfunktion von Promtail ist es jedoch, gespeicherte Protokolldateien zu erkennen und sie in Verbindung mit einer Reihe von Labels an Loki weiterzuleiten. 
-So kann Promtail beispielsweise Kubernetes Pods selbstständig erkennen, welche auf dem gleichen Node wie Promtail laufen oder Container Sidecar genutzt werden.
-Es bietet ebenfalls Treiber für Docker Container und kann logs von ausgewählten Ordnern auslesen. 
+Fluentd \cite{fluentdWebsite}, welche nicht dem Unternehmen hinter Elasticsearch gehört, wird jedoch oft als zusätzliches Tool mit deren Produkten zur Datensammlung verwendet. 
+Fluentd kann verwendet werden, um Logs aus vielen Quellen aufzunehmen, zu verarbeiten und an ein oder mehrere Ziele weiterzuleiten.
+Im Gegensatz dazu ist die Lösung von Grafana Labs,
+namens Promtail \cite{promtailWebsite} auf Loki zugeschnitten. 
+Die Hauptfunktion von Promtail ist es jedoch, gespeicherte Protokolldateien zu erkennen und sie in Verbindung mit einer Reihe von Labels an Loki weiterzuleiten. Promtail funktioniert
+ähnlich simpel wie Prometheus und exportiert offene Telemetriedaten in einfacher Textform.
+So kann Promtail beispielsweise Kubernetes Pods selbstständig erkennen, welche auf dem gleichen Node wie Promtail laufen oder als Container Sidecar genutzt werden.
+Es bietet ebenfalls Integrationen für Docker Container und kann Logs von ausgewählten Containern auslesen. 
 
 Die Protokollerstellung von Loki durch Label Paare ist sehr ähnlich zur Erstellung von Metriken von Prometheus. 
 Wird Loki in einer Umgebung zusammen mit Prometheus eingesetzt, haben die Protokolle von Promtail in der Regel die gleichen Labels wie die Metriken der Anwendungen, da sie die gleichen Mechanismen zur Erkennung von Services nutzen. 
