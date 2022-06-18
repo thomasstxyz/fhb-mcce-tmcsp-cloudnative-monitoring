@@ -3,18 +3,19 @@
 In cloudnativen Umgebungen gelten hohe Anforderungen an das Monitoring.
 Es müssen weitaus komplexere und vernetzte Infrastrukturen überwacht und observiert werden.
 Der Microservice-Ansatz im Software-Architektur-Design macht es mit
-steigender Anzahl an Diensten stetig schwieriger eine Applikation 
-ganzheitlich zu monitoren. 
+steigender Anzahl an Diensten stetig schwieriger, eine Applikation 
+ganzheitlich zu monitoren.
 
-Logs werden statt auf einer, oder 
-einer Hand voll physischen Maschinen, hingegen auf bis zu hunderten
-verteilten Systemen geschrieben, oder nicht geschrieben, sondern lediglich auf 
+\subsection{Logs}
+Logs werden statt auf einer oder 
+einer Handvoll physischen Maschinen hingegen auf bis zu Hunderten
+verteilten Systemen geschrieben oder nicht geschrieben, sondern lediglich auf 
 die Standardausgabe ausgegeben. Um diesen veränderten Rahmenbedingungen 
 und Anforderungen nachzukommen, müssen Monitoring-Systeme angepasst werden.
 Cloudnative Monitoring-Tools aggregieren Logs einer Applikation
 von beliebig vielen vernetzten Systemen in eine gemeinsame Datenbank.
 Somit können diese Logs zum einen persistiert werden. Des Weiteren können die 
-zusammengeführten Logs von einer Suchmaschine indiziert werden, und
+zusammengeführten Logs von einer Suchmaschine indiziert werden und
 im Anschluss effektiv durchsucht werden. Logs von verschiedenen oder 
 verwandten Applikationen können miteinander verglichen werden.
 Mit Softwarelösungen wie Elasticsearch \cite{elasticsearchWebsite}
@@ -24,7 +25,8 @@ Elasticsearch bietet noch viele weitere Funktionen im Bereich
 Analyse von Big Data.
 Logs geben in der Regel detailliertere Informationen über Ressourcen als Metriken.
 
-Metriken sind typischerweise als Zahlen dargestellte Daten, meist in Relation
+\subsection{Metriken}
+Metriken sind typischerweise als Zahlen dargestellte Daten, die meist in Relation
 zur relativen Zeit, welche in einer Time-Series-Datenbank persistiert werden.
 Ebenso sind unter Metriken jene Werte zu verstehen, 
 die auch traditionelle Monitoring-Systeme wie beispielsweise
@@ -42,14 +44,15 @@ Um also auftretende Fehler oder Unstimmigkeiten bei verteilten Anwendungen
 effizient erkennen zu können, kommen heutzutage in cloudnativen Monitoring-Systemen
 die sogenannten Traces zum Einsatz.
 
-Traces - wie der Name schon verrät - 
-sind Anwendungs-Trace-Daten, die Informationen über bestimmte Anwendungsvorgänge
+\subsection{Traces}
+Traces sind, wie der Name schon verrät,  
+Anwendungs-Trace-Daten, die Informationen über bestimmte Anwendungsvorgänge
 "verfolgen". Da heutzutage so viele Anwendungen voneinander abhängig sind, 
 umfassen diese Vorgänge in der Regel Sprünge durch mehrere Dienste, sogenannte Spans.
 Traces bieten somit einen wichtigen Einblick in den Zustand einer Anwendung 
 von Ende zu Ende. Sie konzentrieren sich jedoch ausschließlich auf die Anwendungsebene
 und bieten nur begrenzte Einblicke in den Zustand der zugrunde liegenden Infrastruktur.
-Selbst wenn Traces gesammelt, werden also immer noch Metriken benötigt werden, 
+Selbst wenn Traces gesammelt werden also immer noch Metriken benötigt werden, 
 um einen vollständigen Überblick über eine Umgebung zu erhalten. 
 Application-Performance-Management-Tools (APM-Tools) speisen Trace-Informationen in einen
 zentralisierten Metrikspeicher ein, sodass Traces eine gute Datenquelle für eine anwendungszentrierte Sichtweise darstellen.
@@ -65,6 +68,7 @@ Verteiltes Tracing ist eine Möglichkeit, Anfragen zu beobachten, während sie s
 durch verteilte Cloud-Umgebungen bewegen. In diesen komplexen Systemen zeigen Traces 
 Probleme auf, die bei den Beziehungen zwischen einzelnen Diensten auftreten können.
 
+\subsection{Projektumsetzung}
 In folgenden dieses Papers wird die Installation, sowie die erste Einrichtung
 der open-source Lösungen Elasticsearch und Kibana beschrieben.
 Diese werden von dem amerikanischen Unternehmen Elasticsearch B.V.
@@ -75,7 +79,7 @@ Software-Lösungen wie Logstash oder Beats zum Elastic Stack erweitert werden.
 Zusammen bildet der Stack ein mächtiges Tool zur cloudnativen
 Observability.
 
-Observability ist die Fähigkeit, den internen Zustand eines Systems zu verstehen, 
+Observability bezeichnet dabei die Fähigkeit, den internen Zustand eines Systems zu verstehen, 
 indem die von ihm erzeugten Daten wie Logs, Metriken und Traces analysiert werden.
 
 
